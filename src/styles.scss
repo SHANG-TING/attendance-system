@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/cdk/overlay-prebuilt.css';
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.modal-backdrop.show {
+  opacity: 0.5 !important;
+}
+
+.modal-backdrop {
+  z-index: 100000 !important;
+}
+
+.modal {
+  z-index: 100001 !important;
+}
+
+:root {
+  --deepBlue: #034298;
+  --deepOrange: #e55a13;
+}
+
+html,
+body {
+  font-family: 'Open Sans', sans-serif;
+  height: 100vh;
+  // background: linear-gradient(to bottom, #66a5ff 0, #8525ee 100%);
+  background-color: var(--deepBlue);
+}
+
+body {
+  transform: translate3d(0, 0, 0);
+}

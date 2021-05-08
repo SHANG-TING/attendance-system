@@ -1,0 +1,14 @@
+{
+  "cSpell.words": [
+    "Topnav",
+    "crossorigin",
+    "curr",
+    "panend",
+    "panmove",
+    "panstart",
+    "scroller",
+    "signin",
+    "hant"
+  ],
+  "typescript.tsdk": "node_modules\\typescript\\lib"
+}

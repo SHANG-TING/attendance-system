@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark shadow">
+  <a class="navbar-brand" href="javascript:void(0)" [routerLink]="['/']" (click)="isExpanded = false"
+    >Attendance System</a
+  >
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarCollapse"
+    aria-controls="navbarCollapse"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    (click)="isExpanded = !isExpanded"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarCollapse" [class.show]="isExpanded">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" [routerLink]="['/dashboard']" routerLinkActive="active">
+        <a class="nav-link" href="javascript:void(0)" (click)="isExpanded = false"
+          ><i class="fa fa-home" aria-hidden="true"></i> Home</a
+        >
+      </li>
+      <li class="nav-item" [routerLink]="['/calendar']" routerLinkActive="active">
+        <a class="nav-link" href="javascript:void(0)" (click)="isExpanded = false"
+          ><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Calendar</a
+        >
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item" [routerLink]="['/login']">
+        <a class="text-black-50 font-weight-lighter" href="javascript:void(0)"
+          ><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>

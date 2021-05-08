@@ -1,0 +1,25 @@
+<form
+  [formGroup]="form"
+  class="login shadow-lg"
+  [class.loading]="loginStatus !== null"
+  [class.ok]="loginStatus === 'ok'"
+  [class.fail]="loginStatus === 'fail'"
+  (ngSubmit)="onSubmit(form.getRawValue())"
+>
+  <h1 class="title text-center">Attendance System</h1>
+  <input type="text" placeholder="Username" formControlName="username" autofocus />
+  <i class="fa fa-user"></i>
+  <input type="password" placeholder="Password" formControlName="password" />
+  <i class="fa fa-key"></i>
+  <!-- <a href="javascript:void(0)">Forgot your password?</a> -->
+  <button [disabled]="!!loginStatus">
+    <i *ngIf="!!loginStatus" class="spinner"></i>
+    <span class="state" [ngSwitch]="loginStatus">
+      <ng-container *ngSwitchCase="'Authenticating'">Authenticating</ng-container>
+      <ng-container *ngSwitchCase="'ok'">Welcome Back!</ng-container>
+      <ng-container *ngSwitchCase="'fail'">Please login again</ng-container>
+      <ng-container *ngSwitchDefault> Log in </ng-container>
+    </span>
+  </button>
+</form>
+<!-- <footer><a target="blank" href="javascript:void(0)">Concat Me</a></footer> -->

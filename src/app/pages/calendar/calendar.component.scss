@@ -1,0 +1,373 @@
+.as-calendar {
+  display: flex;
+  user-select: none;
+  flex-direction: column;
+  touch-action: manipulation;
+  position: relative;
+  background-color: #e9ecef;
+  height: 100%;
+}
+
+.as-calendar,
+.as-calendar-controls,
+.as-calendar-title-wrapper {
+  display: flex;
+}
+
+.as-calendar-wrapper {
+  position: relative;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.as-calendar-header {
+  & {
+    padding: 0.125em;
+  }
+  position: relative;
+  z-index: 1;
+  will-change: opacity;
+}
+
+.as-calendar-controls {
+  align-items: center;
+  box-sizing: content-box;
+  min-height: 2.5em;
+}
+
+.as-calendar-title-wrapper {
+  flex: 1;
+  align-items: center;
+  overflow: hidden;
+}
+
+.as-calendar-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.125em;
+  padding: 0 0.25em;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.as-calendar-month,
+.as-calendar-year {
+  vertical-align: middle;
+}
+
+.as-calendar-button.as-button {
+  color: #007aff;
+
+  &.as-reset {
+    margin: 0;
+  }
+}
+
+.as-button {
+  & {
+    padding: 0 0.5em;
+    margin: 0.5em 0.25em;
+    line-height: 2.25em;
+    border-radius: 0.25em;
+    transition: opacity 0.1s ease-out, background-color 0.1s ease-out;
+  }
+  position: relative;
+  z-index: 1;
+  vertical-align: middle;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  font-size: 1em;
+  box-sizing: border-box;
+  touch-action: manipulation;
+  user-select: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.as-icon-button {
+  & {
+    padding: 0.5em;
+    line-height: normal;
+    border-radius: 4em;
+  }
+  width: 2.5em;
+  height: 2.5em;
+  padding: 0.5em;
+  -webkit-flex: 0 0 auto;
+  -moz-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.as-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+  text-align: center;
+  flex: 0 0 auto;
+
+  & > svg {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+}
+
+.as-reset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.as-calendar-body {
+  height: 100%;
+  box-sizing: border-box;
+  display: table-row;
+}
+
+.as-calendar-body-inner {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.as-calendar-picker {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.as-calendar-picker-main {
+  position: relative;
+  margin-left: -1px;
+}
+
+.as-calendar-scroll-wrapper {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  > div {
+    height: 100%;
+    > div {
+      height: 100%;
+      transform: translateZ(0);
+    }
+  }
+}
+
+.as-scroller-bar-cont {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateZ(0);
+  transition: opacity 0.2s;
+}
+
+.as-scroller-bar-hidden {
+  display: none;
+}
+
+.as-scroller-bar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 10px;
+}
+
+.as-calendar-slide-container {
+  -webkit-transform-style: preserve-3d;
+}
+
+.as-calendar-slide-container,
+.as-calendar-slide {
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+}
+
+.as-calendar-slide {
+  box-sizing: border-box;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+  &:first-child {
+    position: relative;
+  }
+}
+
+.as-calendar-table,
+.as-calendar-weekdays {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.as-calendar-row,
+.as-calendar-table .as-calendar-weekdays {
+  display: table-row;
+}
+
+.as-calendar-cell,
+.as-calendar-week-day {
+  display: table-cell;
+}
+
+.as-calendar-weekday {
+  display: table-cell;
+  height: 2em;
+  font-size: 0.6875em;
+  line-height: 2em;
+  text-align: center;
+  border-bottom: 1px solid transparent;
+}
+
+.as-calendar-cell {
+  & {
+    background: #fff;
+    border-color: #ccc;
+    color: #000;
+  }
+
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.as-calendar-day {
+  & {
+    border-top-style: solid;
+    border-top-width: 1px;
+  }
+
+  max-width: 14.285715%;
+  text-align: center;
+  vertical-align: top;
+}
+
+.as-calendar-day-marked {
+  & {
+    padding-bottom: 0.4375em;
+  }
+  padding-bottom: 0.25em;
+}
+
+.as-calendar-cell-inner {
+  display: table;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid transparent;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.as-selected {
+  .as-calendar-day-text {
+    border-color: #007aff;
+    background: #007aff;
+    color: #fff;
+  }
+}
+
+.as-calendar-day-text {
+  & {
+    width: 1.625em;
+    height: 1.625em;
+    margin: 0.1875em;
+    padding: 0;
+    line-height: 1.625em;
+    border: 2px solid transparent;
+    border-radius: 2em;
+  }
+
+  display: inline-block;
+  text-align: center;
+  box-sizing: content-box;
+}
+
+.as-calendar-marks {
+  & {
+    margin-top: -0.0625em;
+  }
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0.375em;
+  margin-top: -0.125em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.as-calendar-mark {
+  & {
+    background: #ccc;
+  }
+  & {
+    width: 0.375em;
+    height: 0.375em;
+    border-radius: 0.375em;
+    margin: 0 0.0625em;
+  }
+  display: inline-block;
+  vertical-align: top;
+  width: 0.25em;
+  height: 0.25em;
+  margin: 0.0625em;
+  border-radius: 0.25em;
+}
+
+.as-calendar-today {
+  & {
+    color: #007aff;
+  }
+  font-weight: bold;
+}
+
+.as-schedule-date-header {
+  & {
+    background: #f7f7f7;
+    border-color: #ccc;
+  }
+
+  & {
+    position: relative;
+    z-index: 3;
+    will-change: opacity;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+  }
+}
+
+.as-schedule-date-header-text {
+  & {
+    padding: 0.5em;
+    font-size: 0.75em;
+    font-weight: 700;
+  }
+  line-height: 1.5em;
+  text-align: center;
+}

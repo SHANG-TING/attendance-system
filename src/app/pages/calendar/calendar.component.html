@@ -1,0 +1,193 @@
+<div class="as-calendar">
+  <div class="as-calendar-wrapper border-bottom">
+    <div class="as-calendar-header">
+      <div class="as-calendar-controls">
+        <div class="as-calendar-title-wrapper">
+          <button class="as-calendar-button as-button as-reset">
+            <span class="as-calendar-title as-calendar-year">{{ selectedDate$ | async | date: 'yyyy' }}年</span>
+            <span class="as-calendar-title as-calendar-month"> {{ selectedDate$ | async | date: 'MMM' }} </span>
+          </button>
+        </div>
+        <button
+          class="as-calendar-button as-calendar-button-prev as-reset as-button as-icon-button"
+          type="button"
+          (click)="onPrev()"
+        >
+          <span class="as-button-icon as-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path
+                d="M217.9 256L345 129c9.4-9.4 9.4-24.6 0-33.9-9.4-9.4-24.6-9.3-34 0L167 239c-9.1 9.1-9.3 23.7-.7 33.1L310.9 417c4.7 4.7 10.9 7 17 7s12.3-2.3 17-7c9.4-9.4 9.4-24.6 0-33.9L217.9 256z"
+              ></path>
+            </svg>
+          </span>
+        </button>
+        <button
+          class="as-calendar-button as-calendar-button-today as-calendar-header-today as-reset as-button"
+          type="button"
+          (click)="onSelectToday()"
+        >
+          今天
+        </button>
+        <button
+          class="as-calendar-button as-calendar-button-next as-reset as-button as-icon-button"
+          type="button"
+          (click)="onNext()"
+        >
+          <span class="as-button-icon as-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path
+                d="M294.1 256L167 129c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.3 34 0L345 239c9.1 9.1 9.3 23.7.7 33.1L201.1 417c-4.7 4.7-10.9 7-17 7s-12.3-2.3-17-7c-9.4-9.4-9.4-24.6 0-33.9l127-127.1z"
+              ></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="as-calendar-body">
+      <div class="as-calendar-body-inner">
+        <div class="as-calendar-picker as-calendar-picker-main">
+          <div class="as-calendar-scroll-wrapper">
+            <div>
+              <div appCalendarSlideContainer class="as-calendar-slide-container" (swipeChange)="onSwipeChange($event)">
+                <div #calendarSlide class="as-calendar-slide">
+                  <div class="as-calendar-table">
+                    <div class="as-calendar-weekdays">
+                      <div class="as-calendar-weekday">日</div>
+                      <div class="as-calendar-weekday">一</div>
+                      <div class="as-calendar-weekday">二</div>
+                      <div class="as-calendar-weekday">三</div>
+                      <div class="as-calendar-weekday">四</div>
+                      <div class="as-calendar-weekday">五</div>
+                      <div class="as-calendar-weekday">六</div>
+                    </div>
+                    <div role="grid" class="as-calendar-row">
+                      <div
+                        *ngFor="let weekDay of prevWeekDays$ | async; trackBy: trackByFn"
+                        role="gridcell"
+                        class="as-calendar-cell as-calendar-day as-calendar-day-marked"
+                        [class.as-selected]="(selectedDate$ | async).toDateString() === weekDay.dateString"
+                        (click)="onSelect(weekDay.date)"
+                      >
+                        <div class="as-calendar-cell-inner">
+                          <div class="as-calendar-day-text" [class.as-calendar-today]="weekDay.isToday">
+                            {{ weekDay.day }}
+                          </div>
+                          <!-- <div>
+                            <div class="as-calendar-marks">
+                              <div class="as-calendar-mark"></div>
+                            </div>
+                          </div> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div #calendarSlide class="as-calendar-slide">
+                  <div class="as-calendar-table">
+                    <div class="as-calendar-weekdays">
+                      <div class="as-calendar-weekday">日</div>
+                      <div class="as-calendar-weekday">一</div>
+                      <div class="as-calendar-weekday">二</div>
+                      <div class="as-calendar-weekday">三</div>
+                      <div class="as-calendar-weekday">四</div>
+                      <div class="as-calendar-weekday">五</div>
+                      <div class="as-calendar-weekday">六</div>
+                    </div>
+                    <div role="grid" class="as-calendar-row">
+                      <div
+                        *ngFor="let weekDay of currWeekDays$ | async; trackBy: trackByFn"
+                        role="gridcell"
+                        class="as-calendar-cell as-calendar-day as-calendar-day-marked"
+                        [class.as-selected]="(selectedDate$ | async).toDateString() === weekDay.dateString"
+                        (click)="onSelect(weekDay.date)"
+                      >
+                        <div class="as-calendar-cell-inner">
+                          <div class="as-calendar-day-text" [class.as-calendar-today]="weekDay.isToday">
+                            {{ weekDay.day }}
+                          </div>
+                          <!-- <div>
+                          <div class="as-calendar-marks">
+                            <div class="as-calendar-mark"></div>
+                          </div>
+                        </div> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div #calendarSlide class="as-calendar-slide">
+                  <div class="as-calendar-table">
+                    <div class="as-calendar-weekdays">
+                      <div class="as-calendar-weekday">日</div>
+                      <div class="as-calendar-weekday">一</div>
+                      <div class="as-calendar-weekday">二</div>
+                      <div class="as-calendar-weekday">三</div>
+                      <div class="as-calendar-weekday">四</div>
+                      <div class="as-calendar-weekday">五</div>
+                      <div class="as-calendar-weekday">六</div>
+                    </div>
+
+                    <div role="grid" class="as-calendar-row">
+                      <div
+                        *ngFor="let weekDay of nextWeekDays$ | async; trackBy: trackByFn"
+                        role="gridcell"
+                        class="as-calendar-cell as-calendar-day as-calendar-day-marked"
+                        [class.as-selected]="(selectedDate$ | async).toDateString() === weekDay.dateString"
+                        (click)="onSelect(weekDay.date)"
+                      >
+                        <div class="as-calendar-cell-inner">
+                          <div class="as-calendar-day-text" [class.as-calendar-today]="weekDay.isToday">
+                            {{ weekDay.day }}
+                          </div>
+                          <!-- <div>
+                          <div class="as-calendar-marks">
+                            <div class="as-calendar-mark"></div>
+                          </div>
+                        </div> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="as-scroller-bar-cont as-scroller-bar-hidden">
+              <div class="as-scroller-bar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="as-schedule-date-header d-flex">
+    <div class="as-schedule-date-header-text flex-fill">
+      {{ selectedDate$ | async | date: 'fullDate' }}
+    </div>
+  </div>
+  <div class="list-group flex-fill overflow-auto">
+    <a
+      *ngFor="let event of selectedEvents$ | async"
+      href="javascript:void(0)"
+      class="list-group-item list-group-item-action px-0 py-1"
+      (click)="openEventDetailDialog()"
+    >
+      <div class="px-3" style="border-left: 4px solid; border-left-color: var(--deepOrange)">
+        <h5 class="mb-1">{{ event.title }}</h5>
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <div>
+            <p class="mb-1">{{ event.address }}</p>
+            <small>{{ event.workDate }}</small>
+          </div>
+          <img
+            src="https://www.svgrepo.com/show/152281/rocket-ship.svg"
+            alt="大頭照"
+            width="32"
+            class="rounded-circle"
+          />
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

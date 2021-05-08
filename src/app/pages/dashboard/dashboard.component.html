@@ -1,0 +1,44 @@
+<form [formGroup]="form" class="d-flex flex-column text-center" (ngSubmit)="onSubmit()">
+  <p class="fa-2x mb-0 text-white" *ngIf="currentTime$ | async as currentTIme">
+    {{ currentTIme | date: 'yyyy-MM-dd' }}
+    {{ weekDay[currentTIme | date: 'EEEE'] }}
+  </p>
+
+  <p class="fa-5x font-weight-bold text-white">
+    {{ currentTime$ | async | date: 'HH:mm:ss' }}
+  </p>
+
+  <ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div class="align-items-center d-flex w-50">
+        <i class="fa fa-clock-o fa-2x mr-3"></i>
+        <div class="text-left">
+          First time <br />
+          <span class="font-weight-bold">首次打卡</span>
+        </div>
+      </div>
+      <div class="w-50 h4 m-0" [class.font-weight-bold]="startTime" [class.text-black-50]="!startTime">
+        {{ startTime ? (startTime | date: 'HH:mm') : '尚未打卡' }}
+      </div>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div class="align-items-center d-flex w-50">
+        <i class="fa fa-clock-o fa-2x mr-3"></i>
+        <div class="text-left">
+          Last time <br />
+          <span class="font-weight-bold">最後打卡</span>
+        </div>
+      </div>
+      <div class="w-50 h4 m-0" [class.font-weight-bold]="endTime" [class.text-black-50]="!endTime">
+        {{ endTime ? (endTime | date: 'HH:mm') : '尚未打卡' }}
+      </div>
+    </li>
+  </ul>
+
+  <div class="form-group mt-3 text-left">
+    <label for="remark" class="h5 text-white">備註：</label
+    ><input id="remark" type="text" class="form-control" formControlName="remark" />
+  </div>
+
+  <button class="btn btn-info fa-2x rounded-pill">打卡</button>
+</form>
