@@ -26,6 +26,7 @@ export class AsDialogRef<R = any, T = any> {
   }
 
   private _close(type: 'backdropClick' | 'close', data: R): void {
+    this.overlay.backdropElement.classList.remove('show');
     this.overlay.dispose();
 
     this.afterClosed$.next({

@@ -1,16 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/cdk/overlay-prebuilt.css';
 
-.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.modal-backdrop.show {
-  opacity: 0.5 !important;
-}
-
-.modal-backdrop {
-  z-index: 100000 !important;
-}
-
-.modal {
-  z-index: 100001 !important;
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.modal-backdrop {
+  opacity: 0 !important;
+  &.show {
+    opacity: 0.5 !important;
+  }
 }
 
 :root {
