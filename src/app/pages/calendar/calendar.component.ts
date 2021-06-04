@@ -1,11 +1,14 @@
+import { Job } from './../../data/models/job.model';
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AsDialog } from '@attendance-system/shared/ui/dialog/dialog';
-import { addDays, endOfWeek, format, startOfWeek } from 'date-fns';
+import { addDays, endOfWeek, startOfWeek } from 'date-fns';
 import { BehaviorSubject } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { exhaustMap, filter, map, switchMap } from 'rxjs/operators';
+import { JobService } from './../../data/services/job.service';
 import { CalendarSlideContainerDirective } from './calendar-slide-container.directive';
 import { SWIPE_DIRECTION } from './constant';
-import { WeekDay, WeekDays } from './model';
+import { WeekDays } from './model';
+import { WeekDay } from './model/weekday';
 import { EventDetailDialogComponent } from './ui/event-detail-dialog/event-detail-dialog.component';
 import { getMatrix } from './util';
 
@@ -38,15 +41,6 @@ export class CalendarComponent implements OnInit {
   @ViewChild(CalendarSlideContainerDirective) slideContainer: CalendarSlideContainerDirective;
 
   selectedDate$ = new BehaviorSubject<Date>(new Date());
-  selectedEvents$ = this.selectedDate$.pipe(
-    map((date) =>
-      Array.from(Array(10).keys()).map(() => ({
-        title: `【賀欣】王嘉祥Jerry--合約半年保養`,
-        workDate: format(date, 'yyyy/MM/dd'),
-        address: `812高雄市小港區中亨街48號`
-      }))
-    )
-  );
 
   swipeDirection$ = new BehaviorSubject<SWIPE_DIRECTION>(null);
 
@@ -66,7 +60,18 @@ export class CalendarComponent implements OnInit {
     map(calcWeekDays)
   );
 
-  constructor(private dialog: AsDialog) {}
+  selectedJobList$ = this.currWeekDays$.pipe(
+    map((weekDays) => [weekDays[0].date, weekDays.slice(-1)[0].date]),
+    switchMap(([startDate, endDate]) => this.jobService.getList(startDate, endDate)),
+    switchMap((jobList) =>
+      this.selectedDate$.pipe(
+        map((date) => `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`),
+        map((planDate) => jobList.filter((job) => job.PlanDate === planDate))
+      )
+    )
+  );
+
+  constructor(private dialog: AsDialog, private jobService: JobService) {}
 
   ngOnInit(): void {}
 
@@ -115,8 +120,8 @@ export class CalendarComponent implements OnInit {
     this.swipeDirection$.next(direction);
   }
 
-  openEventDetailDialog(): void {
-    this.dialog.open(EventDetailDialogComponent, {}).afterClosed$.subscribe(console.log);
+  openEventDetailDialog(job: Job): void {
+    this.dialog.open(EventDetailDialogComponent, job).afterClosed$.subscribe(console.log);
   }
 
   trackByFn(index: number, el: WeekDay): string {

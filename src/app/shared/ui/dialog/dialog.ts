@@ -11,7 +11,7 @@ export class AsDialog {
   open<R = any, T = any>(content: string | TemplateRef<any> | Type<any>, data: T): AsDialogRef<R> {
     const configs = new OverlayConfig({
       hasBackdrop: true,
-      panelClass: ['fade', 'modal'],
+      panelClass: ['fade', 'modal', 'justify-content-center'],
       backdropClass: ['modal-backdrop', 'show']
     });
 

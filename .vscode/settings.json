@@ -1,14 +1,16 @@
 {
   "cSpell.words": [
+    "Joblist",
     "Topnav",
     "crossorigin",
     "curr",
+    "datepicker",
+    "hant",
     "panend",
     "panmove",
     "panstart",
     "scroller",
-    "signin",
-    "hant"
+    "signin"
   ],
   "typescript.tsdk": "node_modules\\typescript\\lib"
 }

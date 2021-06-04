@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import localeTW from '@angular/common/locales/zh-Hant';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { environment as env } from '@env/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -26,7 +26,7 @@ const MOCK_SERVICES =
   [];
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, CoreModule, AppRoutingModule],
+  imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, CoreModule, AppRoutingModule],
   providers: [...MOCK_SERVICES, { provide: LOCALE_ID, useValue: 'zh-Hant' }],
   bootstrap: [AppComponent]
 })

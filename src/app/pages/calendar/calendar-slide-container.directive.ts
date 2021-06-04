@@ -75,7 +75,6 @@ export class CalendarSlideContainerDirective implements AfterViewInit, OnDestroy
             tap(({ deltaX, distance }) => {
               element.style.transform = `translate3d(${startX + (deltaX < 0 ? -distance : distance)}px, 0px, 0px)`;
             }),
-            tap(console.log),
             takeUntil(
               panEnd$.pipe(
                 map(({ deltaX, distance }) => {

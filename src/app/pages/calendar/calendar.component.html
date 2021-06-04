@@ -3,10 +3,21 @@
     <div class="as-calendar-header">
       <div class="as-calendar-controls">
         <div class="as-calendar-title-wrapper">
-          <button class="as-calendar-button as-button as-reset">
+          <button class="as-calendar-button as-button as-reset" (click)="picker.open()">
             <span class="as-calendar-title as-calendar-year">{{ selectedDate$ | async | date: 'yyyy' }}年</span>
             <span class="as-calendar-title as-calendar-month"> {{ selectedDate$ | async | date: 'MMM' }} </span>
           </button>
+
+          <mat-form-field class="d-none" appearance="fill">
+            <input
+              matInput
+              [matDatepicker]="picker"
+              [ngModel]="selectedDate$ | async"
+              (ngModelChange)="onSelect($event)"
+            />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+          </mat-form-field>
         </div>
         <button
           class="as-calendar-button as-calendar-button-prev as-reset as-button as-icon-button"
@@ -168,17 +179,17 @@
   </div>
   <div class="list-group flex-fill overflow-auto">
     <a
-      *ngFor="let event of selectedEvents$ | async"
+      *ngFor="let job of selectedJobList$ | async"
       href="javascript:void(0)"
       class="list-group-item list-group-item-action px-0 py-1"
-      (click)="openEventDetailDialog()"
+      (click)="openEventDetailDialog(job)"
     >
       <div class="px-3" style="border-left: 4px solid; border-left-color: var(--deepOrange)">
-        <h5 class="mb-1">{{ event.title }}</h5>
+        <h5 class="mb-1">{{ job.Worker }}</h5>
         <div class="d-flex w-100 justify-content-between align-items-center">
           <div>
-            <p class="mb-1">{{ event.address }}</p>
-            <small>{{ event.workDate }}</small>
+            <p class="mb-1">{{ job.Address }}</p>
+            <small>{{ job.PlanDate }}</small>
           </div>
           <img
             src="https://www.svgrepo.com/show/152281/rocket-ship.svg"

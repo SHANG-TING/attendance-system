@@ -1,5 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/cdk/overlay-prebuilt.css';
+
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$as-theme-primary: mat-palette($mat-indigo);
+$as-theme-accent: mat-palette($mat-pink, A200, A100, A400);
+$as-theme-warn: mat-palette($mat-red);
+$as-theme: mat-light-theme($as-theme-primary, $as-theme-accent, $as-theme-warn);
+
+@include mat-datepicker-theme($as-theme);
+@include mat-form-field-theme($as-theme);
+@include mat-input-theme($as-theme);
 
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing.modal-backdrop {
   opacity: 0 !important;

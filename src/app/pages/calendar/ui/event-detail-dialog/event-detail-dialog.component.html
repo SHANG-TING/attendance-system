@@ -1,34 +1,33 @@
 <div class="modal-header">
-  <h5 class="modal-title" id="exampleModalLiveLabel">【賀欣】王嘉祥Jerry--合約半年保養</h5>
+  <h5 class="modal-title" id="exampleModalLiveLabel">【賀欣】{{ job.Worker }}--{{ job.Job }}</h5>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="ref.close()">
     <span aria-hidden="true">×</span>
   </button>
 </div>
 <div class="modal-body">
-  <p>負責工程師：賴韋傑Alan</p>
-  <p>儀器編號：T129</p>
-  <p>客戶名稱：旗勝科技股份有限公司</p>
-  <p>所在廠區：總公司</p>
-  <p>聯絡人：翁瑞霞小姐\管理者</p>
-  <p>電話：<a href="tel:078727777,1641">07-872-7777#1641</a></p>
+  <p>負責工程師：{{ job.Worker }}</p>
+  <p>儀器編號：{{ job.EQ_ID }}</p>
+  <p>客戶名稱：{{ job.CustomerName }}</p>
+  <p>所在廠區：{{ job.Unit_Name }}</p>
+  <p>聯絡人：{{ job.ContactName }}</p>
+  <p>
+    電話：<a href="tel:{{ job.Contact_Content }}">{{ job.Contact_Content }}</a>
+  </p>
   <p>E-Mail:basgw@mektec.com.tw</p>
   <p>
-    地址：<a href="https://www.google.com/maps/search/812高雄市小港區中亨街48號" target="_blank"
-      >812高雄市小港區中亨街48號</a
-    >
+    地址：<a href="https://www.google.com/maps/search/{{ job.Address }}" target="_blank">{{ job.Address }}</a>
   </p>
-  <p>派工日：2021/05/05</p>
-  <p>型號：SEA1000A(w)</p>
-  <p>序號：10600257001018</p>
-  <p>主要構成：無鹵：有,</p>
-  <p>保固日期：2007/11/02</p>
-  <p>合約類型：B-TYPE</p>
-  <p>合約到期日：2021/11/12</p>
-  <p>出廠日：2006/09/08</p>
-  <p>注意事項：保養維修儀器要從 中智街那個路口進入 不然會被罰錢600</p>
-  <p>※拿入場證收據→Billy</p>
-  <p>派工原因：合約年度保養</p>
-  <p>祕書交待事項：從中智街那個路口進入 警衛室找翁小姐帶你到工安上課 (不然會被罰錢600)</p>
+  <p>派工日：{{ job.PlanDate }}</p>
+  <p>型號：{{ job.EQ_Model }}</p>
+  <p>序號：?</p>
+  <p>主要構成：?</p>
+  <p>保固日期：?</p>
+  <p>合約類型：?</p>
+  <p>合約到期日：?</p>
+  <p>出廠日：{{ job.MfeDate }}</p>
+  <p>注意事項：{{ job.Remarks }}</p>
+  <p>派工原因：{{ job.Job }}</p>
+  <p>祕書交待事項：?</p>
 </div>
 <!-- <div class="modal-footer">
   <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="ref.close()">關閉</button>
