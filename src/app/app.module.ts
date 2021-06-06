@@ -7,23 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { AccountServiceMock, RecordServiceMock } from './data/mock';
-import { AccountService, RecordService } from './data/services';
+import { MOCK_SERVICES } from './data/mock';
 
 registerLocaleData(localeTW);
 
-const MOCK_SERVICES =
-  (true && [
-    {
-      provide: AccountService,
-      useValue: AccountServiceMock
-    },
-    {
-      provide: RecordService,
-      useValue: RecordServiceMock
-    }
-  ]) ||
-  [];
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, CoreModule, AppRoutingModule],

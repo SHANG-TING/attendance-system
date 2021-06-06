@@ -10,7 +10,9 @@
     "panmove",
     "panstart",
     "scroller",
-    "signin"
+    "signin",
+    "swipeleft",
+    "swiperight"
   ],
   "typescript.tsdk": "node_modules\\typescript\\lib"
 }
