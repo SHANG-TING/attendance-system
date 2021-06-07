@@ -196,13 +196,13 @@
 }
 
 .as-calendar-slide-container {
-  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
 .as-calendar-slide-container,
 .as-calendar-slide {
-  -webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000;
+  backface-visibility: hidden;
+  perspective: 1000;
 }
 
 .as-calendar-slide {
