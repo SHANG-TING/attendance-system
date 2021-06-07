@@ -14,12 +14,16 @@ export const JobServiceMock = {
         Contact_Content: '04-722-9977',
         EQ_Model: 'SEA1000AII',
         Job: '合約年度保養',
-        Solution: 'NULL',
+        Solution: null,
         PlanDate: '2021/1/6',
         MfeDate: '2009/2/18',
-        Remarks: 'NULL',
-        NoteCustomer: 'NULL',
-        NoteEngineer: 'NULL'
+        Remarks: null,
+        NoteCustomer: null,
+        NoteEngineer: null,
+        Serial: '',
+        WarrantyDate: null,
+        ContractType: null,
+        ContractDate: null
       }
     ])
 };

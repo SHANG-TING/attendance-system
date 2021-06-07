@@ -1,10 +1,11 @@
-import { Job } from './../../data/models/job.model';
+import { formatDate } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Job } from '@attendance-system/data/models';
+import { JobService } from '@attendance-system/data/services';
 import { AsDialog } from '@attendance-system/shared/ui/dialog/dialog';
 import { addDays, endOfWeek, startOfWeek } from 'date-fns';
 import { BehaviorSubject } from 'rxjs';
-import { exhaustMap, filter, map, switchMap } from 'rxjs/operators';
-import { JobService } from './../../data/services/job.service';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { CalendarSlideContainerDirective } from './calendar-slide-container.directive';
 import { SWIPE_DIRECTION } from './constant';
 import { WeekDays } from './model';
@@ -65,7 +66,7 @@ export class CalendarComponent implements OnInit {
     switchMap(([startDate, endDate]) => this.jobService.getList(startDate, endDate)),
     switchMap((jobList) =>
       this.selectedDate$.pipe(
-        map((date) => `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`),
+        map((date) => formatDate(date, 'yyyy/M/d', 'en-us')),
         map((planDate) => jobList.filter((job) => job.PlanDate === planDate))
       )
     )

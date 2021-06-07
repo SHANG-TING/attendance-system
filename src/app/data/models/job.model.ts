@@ -8,10 +8,14 @@ export interface Job {
   Contact_Content: string;
   EQ_Model: string;
   Job: string;
-  Solution: string;
+  Solution?: string;
   PlanDate: string;
   MfeDate: string;
-  Remarks: string;
+  Remarks?: string;
   NoteCustomer: string;
   NoteEngineer: string;
+  Serial: string;
+  WarrantyDate?: string;
+  ContractType?: string;
+  ContractEndDate?: string;
 }

@@ -19,11 +19,10 @@
   </p>
   <p>派工日：{{ job.PlanDate }}</p>
   <p>型號：{{ job.EQ_Model }}</p>
-  <p>序號：?</p>
-  <p>主要構成：?</p>
-  <p>保固日期：?</p>
-  <p>合約類型：?</p>
-  <p>合約到期日：?</p>
+  <p>序號：{{ job.Serial }}</p>
+  <p>保固日期：{{ job.WarrantyDate }}</p>
+  <p>合約類型：{{ job.ContractType }}</p>
+  <p>合約到期日：{{ job.ContractEndDate }}</p>
   <p>出廠日：{{ job.MfeDate }}</p>
   <p>注意事項：{{ job.Remarks }}</p>
   <p>派工原因：{{ job.Job }}</p>
