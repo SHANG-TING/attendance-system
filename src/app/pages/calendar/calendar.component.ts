@@ -111,6 +111,10 @@ export class CalendarComponent implements OnInit {
   }
 
   onSwipeChange({ direction, selectedDate }: { direction: SWIPE_DIRECTION; selectedDate?: Date }): void {
+    if (direction === SWIPE_DIRECTION.INITIAL && !selectedDate) {
+      return;
+    }
+
     if (selectedDate) {
       this.selectedDate$.next(selectedDate);
     } else {
