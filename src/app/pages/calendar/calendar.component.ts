@@ -88,6 +88,18 @@ export class CalendarComponent implements OnInit {
     this.slideContainer.onSwipeChange(SWIPE_DIRECTION.LEFT, element, startX);
   }
 
+  onPrevDay(): void {
+    const selectedDate = this.selectedDate$.value;
+    const targetDate = addDays(selectedDate, -1);
+    this.onSelect(targetDate);
+  }
+
+  onNextDay(): void {
+    const selectedDate = this.selectedDate$.value;
+    const targetDate = addDays(selectedDate, 1);
+    this.onSelect(targetDate);
+  }
+
   onSelect(selectedDate: Date): void {
     const startDate = startOfWeek(this.selectedDate$.value);
     const endDate = endOfWeek(this.selectedDate$.value);

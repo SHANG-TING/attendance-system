@@ -7,7 +7,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '@attendance-system/shared/shared.module';
-import 'hammerjs';
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { CalendarSlideContainerDirective } from './calendar-slide-container.directive';
 import { CalendarComponent } from './calendar.component';

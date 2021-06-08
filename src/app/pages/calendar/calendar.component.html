@@ -177,7 +177,7 @@
       {{ selectedDate$ | async | date: 'fullDate' }}
     </div>
   </div>
-  <div class="list-group flex-fill overflow-auto">
+  <div class="list-group flex-fill overflow-auto" (swipeleft)="onNextDay()" (swiperight)="onPrevDay()">
     <a
       *ngFor="let job of selectedJobList$ | async"
       href="javascript:void(0)"
