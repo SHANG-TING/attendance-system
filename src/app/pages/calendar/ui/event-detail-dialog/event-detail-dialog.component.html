@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h5 class="modal-title" id="exampleModalLiveLabel">【賀欣】{{ job.Worker }}--{{ job.Job }}</h5>
+  <h5 class="modal-title" id="exampleModalLiveLabel">{{ job.Title }}</h5>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="ref.close()">
     <span aria-hidden="true">×</span>
   </button>
@@ -13,7 +13,6 @@
   <p>
     電話：<a href="tel:{{ job.Contact_Content }}">{{ job.Contact_Content }}</a>
   </p>
-  <p>E-Mail:basgw@mektec.com.tw</p>
   <p>
     地址：<a href="https://www.google.com/maps/search/{{ job.Address }}" target="_blank">{{ job.Address }}</a>
   </p>
@@ -24,9 +23,10 @@
   <p>合約類型：{{ job.ContractType }}</p>
   <p>合約到期日：{{ job.ContractEndDate }}</p>
   <p>出廠日：{{ job.MfeDate }}</p>
-  <p>注意事項：{{ job.Remarks }}</p>
+  <p>注意事項：{{ job.NoteCustomer }}</p>
   <p>派工原因：{{ job.Job }}</p>
-  <p>祕書交待事項：?</p>
+  <p>祕書交待事項：{{ job.NoteEngineer }}</p>
+  <p>備註：{{ job.Remarks }}</p>
 </div>
 <!-- <div class="modal-footer">
   <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="ref.close()">關閉</button>

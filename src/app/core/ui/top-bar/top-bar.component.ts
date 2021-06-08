@@ -6,7 +6,7 @@ import { Component, HostBinding, OnInit } from '@angular/core';
   styleUrls: ['./top-bar.component.scss']
 })
 export class TopBarComponent implements OnInit {
-  @HostBinding('className') className = 'd-block position-absolute w-100';
+  @HostBinding('className') className = 'position-absolute w-100';
 
   isExpanded = false;
 

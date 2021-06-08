@@ -18,4 +18,6 @@ export interface Job {
   WarrantyDate?: string;
   ContractType?: string;
   ContractEndDate?: string;
+  ShortName: string;
+  Title: string;
 }

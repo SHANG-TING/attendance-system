@@ -2,7 +2,7 @@ import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, switchMap, tap, toArray } from 'rxjs/operators';
 import { Job } from '../models';
 
 @Injectable({ providedIn: 'root' })
@@ -23,8 +23,12 @@ export class JobService {
       return of(this.cache.get(key));
     }
 
-    return this.http
-      .get<Job[]>('/api/jobs/getJoblist', { params })
-      .pipe(tap((jobList) => this.cache.set(key, jobList)));
+    return this.http.get<Job[]>('/api/jobs/getJoblist', { params }).pipe(
+      switchMap((jobList) => jobList),
+      tap(console.log),
+      map((job) => ({ ...job, Contact_Content: job.Contact_Content.replace('#', ',') })),
+      toArray(),
+      tap((jobList) => this.cache.set(key, jobList))
+    );
   }
 }
