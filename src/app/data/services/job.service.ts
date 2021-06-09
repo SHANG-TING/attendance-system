@@ -26,7 +26,7 @@ export class JobService {
     return this.http.get<Job[]>('/api/jobs/getJoblist', { params }).pipe(
       switchMap((jobList) => jobList),
       tap(console.log),
-      map((job) => ({ ...job, Contact_Content: job.Contact_Content.replace('#', ',') })),
+      map((job) => ({ ...job, Contact_Content: job.Contact_Content?.replace('#', ',') })),
       toArray(),
       tap((jobList) => this.cache.set(key, jobList))
     );
