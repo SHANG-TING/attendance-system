@@ -1,11 +1,33 @@
 import { formatDate } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
+
+import {
+  addDays,
+  endOfWeek,
+  startOfWeek
+} from 'date-fns';
+import {
+  BehaviorSubject,
+  Subject
+} from 'rxjs';
+import {
+  filter,
+  map,
+  switchMap,
+  takeUntil
+} from 'rxjs/operators';
+
 import { Job } from '@attendance-system/data/models';
 import { JobService } from '@attendance-system/data/services';
 import { AsDialog } from '@attendance-system/shared/ui/dialog/dialog';
-import { addDays, endOfWeek, startOfWeek } from 'date-fns';
-import { BehaviorSubject } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+
 import { CalendarSlideContainerDirective } from './calendar-slide-container.directive';
 import { SWIPE_DIRECTION } from './constant';
 import { WeekDays } from './model';
@@ -45,23 +67,9 @@ export class CalendarComponent implements OnInit {
 
   swipeDirection$ = new BehaviorSubject<SWIPE_DIRECTION>(null);
 
-  prevWeekDays$ = this.swipeDirection$.pipe(
+  selectedJobList$ = this.swipeDirection$.pipe(
     filter((swipeDirection) => swipeDirection !== SWIPE_DIRECTION.INITIAL),
-    map(() => addDays(this.selectedDate$.value, -7)),
-    map(calcWeekDays)
-  );
-  currWeekDays$ = this.swipeDirection$.pipe(
-    filter((swipeDirection) => swipeDirection !== SWIPE_DIRECTION.INITIAL),
-    map(() => this.selectedDate$.value),
-    map(calcWeekDays)
-  );
-  nextWeekDays$ = this.swipeDirection$.pipe(
-    filter((swipeDirection) => swipeDirection !== SWIPE_DIRECTION.INITIAL),
-    map(() => addDays(this.selectedDate$.value, 7)),
-    map(calcWeekDays)
-  );
-
-  selectedJobList$ = this.currWeekDays$.pipe(
+    map(() => calcWeekDays(this.selectedDate$.value)),
     map((weekDays) => [weekDays[0].date, weekDays.slice(-1)[0].date]),
     switchMap(([startDate, endDate]) => this.jobService.getList(startDate, endDate)),
     switchMap((jobList) =>
@@ -72,9 +80,33 @@ export class CalendarComponent implements OnInit {
     )
   );
 
-  constructor(private dialog: AsDialog, private jobService: JobService) {}
+  prevWeekDays: WeekDays = calcWeekDays(addDays(this.selectedDate$.value, -7));
+  currWeekDays: WeekDays = calcWeekDays(this.selectedDate$.value);
+  nextWeekDays: WeekDays = calcWeekDays(addDays(this.selectedDate$.value, 7));
 
-  ngOnInit(): void {}
+  private destroy$ = new Subject<void>();
+
+  constructor(private cd: ChangeDetectorRef, private dialog: AsDialog, private jobService: JobService) {}
+
+  ngOnInit(): void {
+    this.swipeDirection$
+      .pipe(
+        filter((swipeDirection) => swipeDirection !== SWIPE_DIRECTION.INITIAL),
+        map(() => this.selectedDate$.value),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((date) => {
+        calcWeekDays(addDays(date, -7)).forEach((weekDay, i) => (this.prevWeekDays[i] = weekDay));
+        calcWeekDays(date).forEach((weekDay, i) => (this.currWeekDays[i] = weekDay));
+        calcWeekDays(addDays(date, 7)).forEach((weekDay, i) => (this.nextWeekDays[i] = weekDay));
+
+        if (this.slideContainer) {
+          this.slideContainer.el.nativeElement.style.transform = 'translate3d(0, 0, 0)';
+        }
+
+        this.cd.detectChanges();
+      });
+  }
 
   onPrev(): void {
     const element = this.slideContainer.el.nativeElement;
@@ -101,6 +133,10 @@ export class CalendarComponent implements OnInit {
   }
 
   onSelect(selectedDate: Date): void {
+    if (this.slideContainer.el.nativeElement.style.transform !== 'translate3d(0px, 0px, 0px)') {
+      return;
+    }
+
     const startDate = startOfWeek(this.selectedDate$.value);
     const endDate = endOfWeek(this.selectedDate$.value);
 

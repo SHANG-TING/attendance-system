@@ -73,7 +73,7 @@
                     </div>
                     <div role="grid" class="as-calendar-row">
                       <div
-                        *ngFor="let weekDay of prevWeekDays$ | async; trackBy: trackByFn"
+                        *ngFor="let weekDay of prevWeekDays; trackBy: trackByFn"
                         role="gridcell"
                         class="as-calendar-cell as-calendar-day as-calendar-day-marked"
                         [class.as-selected]="(selectedDate$ | async).toDateString() === weekDay.dateString"
@@ -107,7 +107,7 @@
                     </div>
                     <div role="grid" class="as-calendar-row">
                       <div
-                        *ngFor="let weekDay of currWeekDays$ | async; trackBy: trackByFn"
+                        *ngFor="let weekDay of currWeekDays; trackBy: trackByFn"
                         role="gridcell"
                         class="as-calendar-cell as-calendar-day as-calendar-day-marked"
                         [class.as-selected]="(selectedDate$ | async).toDateString() === weekDay.dateString"
@@ -142,7 +142,7 @@
 
                     <div role="grid" class="as-calendar-row">
                       <div
-                        *ngFor="let weekDay of nextWeekDays$ | async; trackBy: trackByFn"
+                        *ngFor="let weekDay of nextWeekDays; trackBy: trackByFn"
                         role="gridcell"
                         class="as-calendar-cell as-calendar-day as-calendar-day-marked"
                         [class.as-selected]="(selectedDate$ | async).toDateString() === weekDay.dateString"
@@ -177,7 +177,11 @@
       {{ selectedDate$ | async | date: 'fullDate' }}
     </div>
   </div>
-  <div class="list-group flex-fill overflow-auto" (swipeleft)="onNextDay()" (swiperight)="onPrevDay()">
+  <div
+    class="as-calendar-events list-group flex-fill overflow-auto"
+    (swipeleft)="onNextDay()"
+    (swiperight)="onPrevDay()"
+  >
     <a
       *ngFor="let job of selectedJobList$ | async"
       href="javascript:void(0)"

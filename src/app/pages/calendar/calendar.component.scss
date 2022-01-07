@@ -27,7 +27,6 @@
   }
   position: relative;
   z-index: 1;
-  will-change: opacity;
 }
 
 .as-calendar-controls {
@@ -164,10 +163,6 @@
   height: 100%;
   > div {
     height: 100%;
-    > div {
-      height: 100%;
-      transform: translateZ(0);
-    }
   }
 }
 
@@ -197,12 +192,12 @@
 
 .as-calendar-slide-container {
   transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .as-calendar-slide-container,
 .as-calendar-slide {
   backface-visibility: hidden;
-  perspective: 1000;
 }
 
 .as-calendar-slide {
@@ -356,7 +351,6 @@
   & {
     position: relative;
     z-index: 3;
-    will-change: opacity;
     border-top: 1px solid;
     border-bottom: 1px solid;
   }
@@ -370,4 +364,8 @@
   }
   line-height: 1.5em;
   text-align: center;
+}
+
+.as-calendar-events {
+  touch-action: pan-y !important;
 }
