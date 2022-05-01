@@ -20,17 +20,43 @@ $as-theme: mat-light-theme($as-theme-primary, $as-theme-accent, $as-theme-warn);
   }
 }
 
-:root {
-  --deepBlue: #034298;
-  --deepOrange: #e55a13;
-}
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+$theme-colors: (
+  'primary': #034298,
+  'secondary': #e55a13,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger,
+  'light': $light,
+  'dark': $dark
+);
+
+@import '~bootstrap/scss/root';
+@import '~bootstrap/scss/reboot';
+@import '~bootstrap/scss/transitions';
+@import '~bootstrap/scss/type';
+@import '~bootstrap/scss/images';
+@import '~bootstrap/scss/list-group';
+@import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/forms';
+@import '~bootstrap/scss/nav';
+@import '~bootstrap/scss/navbar';
+@import '~bootstrap/scss/code';
+@import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/button-group';
+@import '~bootstrap/scss/badge';
+@import '~bootstrap/scss/utilities';
 
 html,
 body {
   font-family: 'Open Sans', sans-serif;
   height: 100vh;
   // background: linear-gradient(to bottom, #66a5ff 0, #8525ee 100%);
-  background-color: var(--deepBlue);
+  background-color: var(--primary);
 }
 
 body {

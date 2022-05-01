@@ -86,7 +86,7 @@
       outline: none;
       color: #444;
       // border-color: var(--primary);
-      border-color: var(--deepOrange);
+      border-color: var(--secondary);
       border-left-width: 35px;
     }
   }
@@ -98,7 +98,7 @@
   }
 
   .title {
-    color: var(--deepBlue);
+    color: var(--primary);
     font-size: 1.2em;
     font-weight: bold;
     margin: 10px 0 30px 0;
@@ -110,7 +110,7 @@
     height: 100%;
     padding: 10px 10px;
     // background: var(--primary);
-    background-color: var(--deepOrange);
+    background-color: var(--secondary);
     color: #fff;
     display: block;
     border: none;

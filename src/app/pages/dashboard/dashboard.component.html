@@ -1,4 +1,4 @@
-<form [formGroup]="form" class="d-flex flex-column text-center" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" class="d-flex flex-column text-center">
   <p class="fa-2x mb-0 text-white" *ngIf="currentTime$ | async as currentTIme">
     {{ currentTIme | date: 'yyyy-MM-dd' }}
     {{ weekDay[currentTIme | date: 'EEEE'] }}
@@ -40,5 +40,15 @@
     ><input id="remark" type="text" class="form-control" formControlName="remark" />
   </div>
 
-  <button class="btn btn-info fa-2x rounded-pill">打卡</button>
+  <div class="d-flex">
+    <button class="btn btn-secondary fa-2x rounded w-50" type="button" (click)="onSubmit()">
+      上班打卡
+      <span *ngIf="startTime">（編輯）</span>
+    </button>
+    <i class="flex-fill p-1"></i>
+    <button class="btn btn-secondary fa-2x rounded w-50" type="button" (click)="onSubmit()">
+      下班打卡
+      <span *ngIf="endTime">（編輯）</span>
+    </button>
+  </div>
 </form>

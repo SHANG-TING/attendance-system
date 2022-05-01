@@ -32,6 +32,9 @@ export class DashboardComponent implements OnInit {
     Sunday: '星期日'
   };
 
+  hours = Array.from({ length: 24 }, (_, i) => i);
+  minutes = Array.from({ length: 60 }, (_, i) => i);
+
   constructor(private fb: FormBuilder, private recordService: RecordService) {}
 
   ngOnInit(): void {

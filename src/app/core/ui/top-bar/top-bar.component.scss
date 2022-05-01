@@ -1,9 +1,9 @@
 .navbar {
-  background-color: var(--deepBlue);
+  background-color: var(--primary);
   z-index: 2;
   transform: translateZ(1px);
 }
 
 .navbar-toggler {
-  background-color: var(--deepOrange);
+  background-color: var(--secondary);
 }
