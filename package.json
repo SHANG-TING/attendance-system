@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~13.3.5",
     "@angular/platform-browser-dynamic": "~13.3.5",
     "@angular/router": "~13.3.5",
+    "@angular/service-worker": "~13.3.5",
     "@types/hammerjs": "^2.0.39",
     "bootstrap": "^4.6.0",
     "date-fns": "^2.21.3",
