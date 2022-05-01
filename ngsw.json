@@ -1,0 +1,91 @@
+{
+  "configVersion": 1,
+  "timestamp": 1651440089961,
+  "index": "/attendance-system/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/attendance-system/625.47534c4dc1ab8525.js",
+        "/attendance-system/69.4a6ceb67c92f67af.js",
+        "/attendance-system/86.ac65f11d167537bf.js",
+        "/attendance-system/876.c501bff996832a9e.js",
+        "/attendance-system/common.4f3c2306799ae148.js",
+        "/attendance-system/favicon.ico",
+        "/attendance-system/index.html",
+        "/attendance-system/main.62660b67c0d0d75d.js",
+        "/attendance-system/manifest.webmanifest",
+        "/attendance-system/polyfills.d530b8acb57599e3.js",
+        "/attendance-system/runtime.9a559b7b684c713e.js",
+        "/attendance-system/styles.2cded60de4674825.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/attendance-system/assets/icons/icon-128x128.png",
+        "/attendance-system/assets/icons/icon-144x144.png",
+        "/attendance-system/assets/icons/icon-152x152.png",
+        "/attendance-system/assets/icons/icon-192x192.png",
+        "/attendance-system/assets/icons/icon-384x384.png",
+        "/attendance-system/assets/icons/icon-512x512.png",
+        "/attendance-system/assets/icons/icon-72x72.png",
+        "/attendance-system/assets/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/attendance-system/625.47534c4dc1ab8525.js": "4c177025a76e2507cdc91578f4b9f3033470d4cb",
+    "/attendance-system/69.4a6ceb67c92f67af.js": "61f86a256a3fca57a2ba8365b7eb3e558daf6842",
+    "/attendance-system/86.ac65f11d167537bf.js": "348dc66384a4535b96ac0280e036eeca2fd11e3f",
+    "/attendance-system/876.c501bff996832a9e.js": "f2c80893d053567304d36b43536f3c51aeb3e258",
+    "/attendance-system/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/attendance-system/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/attendance-system/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/attendance-system/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/attendance-system/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/attendance-system/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/attendance-system/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/attendance-system/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/attendance-system/common.4f3c2306799ae148.js": "5fc480a98cd24e318cc5d7a34c367b838da6d6f3",
+    "/attendance-system/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/attendance-system/index.html": "49e23e9f4f42406036d5d821faa586ffc99d9d4b",
+    "/attendance-system/main.62660b67c0d0d75d.js": "499f971eda4eedd8d3194b65fd9ce3adfe83b76e",
+    "/attendance-system/manifest.webmanifest": "9dc50fe9bf18c4382358a9a8048dd65bd2e657d1",
+    "/attendance-system/polyfills.d530b8acb57599e3.js": "e01379aa279ac0bcbeafdb1fa7f6ba3e91a7e475",
+    "/attendance-system/runtime.9a559b7b684c713e.js": "5cf3affaec2ff50f78a42c880d63e64c7fe60b63",
+    "/attendance-system/styles.2cded60de4674825.css": "baa5a2ef17bb9ca231386d4f329a5358004dace9"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
