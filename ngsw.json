@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1651442130644,
+  "timestamp": 1651442398173,
   "index": "/attendance-system/index.html",
   "assetGroups": [
     {
@@ -18,7 +18,7 @@
         "/attendance-system/common.4f3c2306799ae148.js",
         "/attendance-system/favicon.ico",
         "/attendance-system/index.html",
-        "/attendance-system/main.f36ce6e88e7f790f.js",
+        "/attendance-system/main.ed8b6aad59f02877.js",
         "/attendance-system/manifest.webmanifest",
         "/attendance-system/polyfills.d530b8acb57599e3.js",
         "/attendance-system/runtime.9a559b7b684c713e.js",
@@ -62,8 +62,8 @@
     "/attendance-system/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/attendance-system/common.4f3c2306799ae148.js": "5fc480a98cd24e318cc5d7a34c367b838da6d6f3",
     "/attendance-system/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/attendance-system/index.html": "a09eb78c0ab1d09535e2327037e0bb294b79d0db",
-    "/attendance-system/main.f36ce6e88e7f790f.js": "222f53bcec07982537e93a790d575ff26c9fdba6",
+    "/attendance-system/index.html": "e1475bccc1f3ac625137bc5f4eeed125eb328db7",
+    "/attendance-system/main.ed8b6aad59f02877.js": "696375a96717d3bcefe120d501efa92531cb00f5",
     "/attendance-system/manifest.webmanifest": "9dc50fe9bf18c4382358a9a8048dd65bd2e657d1",
     "/attendance-system/polyfills.d530b8acb57599e3.js": "e01379aa279ac0bcbeafdb1fa7f6ba3e91a7e475",
     "/attendance-system/runtime.9a559b7b684c713e.js": "5cf3affaec2ff50f78a42c880d63e64c7fe60b63",
