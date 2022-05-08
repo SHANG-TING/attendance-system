@@ -4,7 +4,6 @@
   flex-direction: column;
   touch-action: manipulation;
   position: relative;
-  background-color: #e9ecef;
   height: 100%;
 }
 
@@ -56,7 +55,7 @@
 }
 
 .as-calendar-button.as-button {
-  color: #007aff;
+  color: var(--white);
 
   &.as-reset {
     margin: 0;
@@ -232,6 +231,7 @@
 .as-calendar-weekday {
   display: table-cell;
   height: 2em;
+  color: var(--white);
   font-size: 0.6875em;
   line-height: 2em;
   text-align: center;
@@ -240,9 +240,7 @@
 
 .as-calendar-cell {
   & {
-    background: #fff;
-    border-color: #ccc;
-    color: #000;
+    color: var(--white);
   }
 
   position: relative;
@@ -344,14 +342,12 @@
 
 .as-schedule-date-header {
   & {
-    background: #f7f7f7;
-    border-color: #ccc;
+    background: var(--secondary);
   }
 
   & {
     position: relative;
     z-index: 3;
-    border-top: 1px solid;
     border-bottom: 1px solid;
   }
 }

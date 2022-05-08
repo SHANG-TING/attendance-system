@@ -1,11 +1,15 @@
 <div class="as-calendar">
-  <div class="as-calendar-wrapper border-bottom">
+  <div class="as-calendar-wrapper">
     <div class="as-calendar-header">
       <div class="as-calendar-controls">
         <div class="as-calendar-title-wrapper">
           <button class="as-calendar-button as-button as-reset" (click)="picker.open()">
-            <span class="as-calendar-title as-calendar-year">{{ selectedDate$ | async | date: 'yyyy' }}年</span>
-            <span class="as-calendar-title as-calendar-month"> {{ selectedDate$ | async | date: 'MMM' }} </span>
+            <span class="as-calendar-title as-calendar-year"
+              >{{ selectedDate$ | async | date: 'yyyy' }}年</span
+            >
+            <span class="as-calendar-title as-calendar-month">
+              {{ selectedDate$ | async | date: 'MMM' }}
+            </span>
           </button>
 
           <mat-form-field class="d-none" appearance="fill">
@@ -59,7 +63,11 @@
         <div class="as-calendar-picker as-calendar-picker-main">
           <div class="as-calendar-scroll-wrapper">
             <div>
-              <div appCalendarSlideContainer class="as-calendar-slide-container" (swipeChange)="onSwipeChange($event)">
+              <div
+                appCalendarSlideContainer
+                class="as-calendar-slide-container"
+                (swipeChange)="onSwipeChange($event)"
+              >
                 <div #calendarSlide class="as-calendar-slide">
                   <div class="as-calendar-table">
                     <div class="as-calendar-weekdays">
@@ -76,11 +84,16 @@
                         *ngFor="let weekDay of prevWeekDays; trackBy: trackByFn"
                         role="gridcell"
                         class="as-calendar-cell as-calendar-day as-calendar-day-marked"
-                        [class.as-selected]="(selectedDate$ | async).toDateString() === weekDay.dateString"
+                        [class.as-selected]="
+                          (selectedDate$ | async).toDateString() === weekDay.dateString
+                        "
                         (click)="onSelect(weekDay.date)"
                       >
                         <div class="as-calendar-cell-inner">
-                          <div class="as-calendar-day-text" [class.as-calendar-today]="weekDay.isToday">
+                          <div
+                            class="as-calendar-day-text"
+                            [class.as-calendar-today]="weekDay.isToday"
+                          >
                             {{ weekDay.day }}
                           </div>
                           <!-- <div>
@@ -110,11 +123,16 @@
                         *ngFor="let weekDay of currWeekDays; trackBy: trackByFn"
                         role="gridcell"
                         class="as-calendar-cell as-calendar-day as-calendar-day-marked"
-                        [class.as-selected]="(selectedDate$ | async).toDateString() === weekDay.dateString"
+                        [class.as-selected]="
+                          (selectedDate$ | async).toDateString() === weekDay.dateString
+                        "
                         (click)="onSelect(weekDay.date)"
                       >
                         <div class="as-calendar-cell-inner">
-                          <div class="as-calendar-day-text" [class.as-calendar-today]="weekDay.isToday">
+                          <div
+                            class="as-calendar-day-text"
+                            [class.as-calendar-today]="weekDay.isToday"
+                          >
                             {{ weekDay.day }}
                           </div>
                           <!-- <div>
@@ -145,11 +163,16 @@
                         *ngFor="let weekDay of nextWeekDays; trackBy: trackByFn"
                         role="gridcell"
                         class="as-calendar-cell as-calendar-day as-calendar-day-marked"
-                        [class.as-selected]="(selectedDate$ | async).toDateString() === weekDay.dateString"
+                        [class.as-selected]="
+                          (selectedDate$ | async).toDateString() === weekDay.dateString
+                        "
                         (click)="onSelect(weekDay.date)"
                       >
                         <div class="as-calendar-cell-inner">
-                          <div class="as-calendar-day-text" [class.as-calendar-today]="weekDay.isToday">
+                          <div
+                            class="as-calendar-day-text"
+                            [class.as-calendar-today]="weekDay.isToday"
+                          >
                             {{ weekDay.day }}
                           </div>
                           <!-- <div>
@@ -172,7 +195,7 @@
       </div>
     </div>
   </div>
-  <div class="as-schedule-date-header d-flex">
+  <div class="as-schedule-date-header d-flex shadow-lg">
     <div class="as-schedule-date-header-text flex-fill">
       {{ selectedDate$ | async | date: 'fullDate' }}
     </div>
@@ -183,9 +206,9 @@
     (swiperight)="onPrevDay()"
   >
     <a
-      *ngFor="let job of selectedJobList$ | async"
+      *ngFor="let job of selectedJobList$ | async;"
       href="javascript:void(0)"
-      class="list-group-item list-group-item-action px-0 py-1"
+      class="list-group-item list-group-item-action px-0 py-1 mb-1"
       (click)="openEventDetailDialog(job)"
     >
       <div class="px-3" style="border-left: 4px solid; border-left-color: var(--secondary)">
