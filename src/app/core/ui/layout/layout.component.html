@@ -2,12 +2,19 @@
 
 <nav class="navbar navbar-expand navbar-dark fixed">
   <ul class="navbar-nav w-100">
-    <li class="nav-item w-50 text-center" [routerLink]="['/dashboard']" routerLinkActive="active">
-      <a class="nav-link" href="javascript:void(0)"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-    </li>
     <li class="nav-item w-50 text-center" [routerLink]="['/calendar']" routerLinkActive="active">
       <a class="nav-link" href="javascript:void(0)"
-        ><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Calendar</a
+        ><i class="fa fa-calendar-check-o" aria-hidden="true"></i> 行事曆</a
+      >
+    </li>
+    <li class="nav-item w-50 text-center" [routerLink]="['/dashboard']" routerLinkActive="active">
+      <a class="nav-link" href="javascript:void(0)"
+        ><i class="fa fa-clock-o" aria-hidden="true"></i> 打卡</a
+      >
+    </li>
+    <li class="nav-item w-50 text-center" [routerLink]="['/search']" routerLinkActive="active">
+      <a class="nav-link" href="javascript:void(0)"
+        ><i class="fa fa-search" aria-hidden="true"></i> 查詢</a
       >
     </li>
   </ul>

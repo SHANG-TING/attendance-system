@@ -17,11 +17,16 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: async () => (await import('./pages/dashboard/dashboard.module')).DashboardModule
+        loadChildren: async () =>
+          (await import('./pages/dashboard/dashboard.module')).DashboardModule
       },
       {
         path: 'calendar',
         loadChildren: async () => (await import('./pages/calendar/calendar.module')).CalendarModule
+      },
+      {
+        path: 'search',
+        loadChildren: async () => (await import('./pages/search/search.module')).SearchModule
       }
     ]
   },
