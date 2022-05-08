@@ -1,31 +1,34 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
+import { format, addDays } from 'date-fns';
 import { Observable } from 'rxjs';
-import { formatDate } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class RecordService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getRange(startTime?: string, endTime?: string): Observable<{ startTime: string, endTime: string, remark: string }> {
+  getRange(
+    startTime?: string,
+    endTime?: string
+  ): Observable<{ startTime: string; endTime: string; remark: string; isOverTime?: boolean }> {
     const now = new Date();
     const params = {} as any;
 
     if (!startTime) {
-      params.startTime = formatDate(now, 'yyyy-MM-dd 00:00:00.000', 'en-us');
+      params.startTime = format(now, 'yyyy-MM-dd 00:00:00.000');
     }
 
     if (!endTime) {
-      params.endTime = formatDate(now.setDate(now.getDate() + 1), 'yyyy-MM-dd 00:00:00.000', 'en-us');
+      params.endTime = format(addDays(now, 1), 'yyyy-MM-dd 00:00:00.000');
     }
 
-    return this.http.get<{ startTime: string, endTime: string, remark: string }>(`/api/records`, {
+    return this.http.get<{ startTime: string; endTime: string; remark: string }>(`/api/records`, {
       params
     });
   }
 
-  create(remark: string): Observable<any> {
-    return this.http.post(`/api/records`, { remark });
+  create(data: { remark: string; attendDateTime?: string; overTime?: boolean }): Observable<any> {
+    return this.http.post(`/api/records`, data);
   }
 }

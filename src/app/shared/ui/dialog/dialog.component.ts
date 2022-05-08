@@ -26,6 +26,7 @@ export class AsDialogComponent implements OnInit {
     } else if (this.content instanceof TemplateRef) {
       this.contentType = 'template';
       this.context = {
+        $implicit: this.ref.data,
         close: this.ref.close.bind(this.ref)
       };
     } else {

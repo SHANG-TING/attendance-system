@@ -1,4 +1,4 @@
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { OverlayRef } from '@angular/cdk/overlay';
 
@@ -19,6 +19,10 @@ export class AsDialogRef<R = any, T = any> {
     public data: T // pass data to modal i.e. FormData
   ) {
     overlay.backdropClick().subscribe(() => this._close('backdropClick', null));
+  }
+
+  afterClosed(): Observable<AsDialogCloseEvent<R>> {
+    return this.afterClosed$.asObservable();
   }
 
   close(data?: R): void {

@@ -5,7 +5,7 @@ import { JobServiceMock } from './job-service.mock';
 import { RecordServiceMock } from './record-service.mock';
 
 export const MOCK_SERVICES = (() => {
-  if (environment.production) {
+  if (!environment.enableMock) {
     return [];
   }
 

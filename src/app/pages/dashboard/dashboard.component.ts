@@ -1,8 +1,12 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { RecordService } from '@attendance-system/data/services';
+
+import { format, parse, differenceInMinutes } from 'date-fns';
 import { timer } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+
+import { RecordService } from '@attendance-system/data/services';
+import { AsDialog, AsDialogRef } from '@attendance-system/shared/ui/dialog';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,6 +14,7 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  @ViewChild('editTimeTpl', { static: true }) editTimeTpl: TemplateRef<void>;
   @HostBinding('className') className = 'd-flex justify-content-center pt-2';
 
   currentTime$ = timer(0, 1000).pipe(
@@ -19,8 +24,11 @@ export class DashboardComponent implements OnInit {
 
   form = this.fb.group({ remark: [null] });
 
-  startTime = null;
-  endTime = null;
+  editTimeDialogRef: AsDialogRef<any, any>;
+  editTimeForm = this.fb.group({ hour: [0], minute: [0], isOverTime: [false] });
+
+  startTime: Date = null;
+  endTime: Date = null;
 
   readonly weekDay = {
     Monday: '星期一',
@@ -31,29 +39,69 @@ export class DashboardComponent implements OnInit {
     Saturday: '星期六',
     Sunday: '星期日'
   };
+  readonly hours = [19, 20, 21, 22, 23];
+  readonly minutes = Array.from({ length: 60 }, (_, i) => i);
 
-  hours = Array.from({ length: 24 }, (_, i) => i);
-  minutes = Array.from({ length: 60 }, (_, i) => i);
+  constructor(
+    private fb: FormBuilder,
+    private recordService: RecordService,
+    private dialog: AsDialog
+  ) {}
 
-  constructor(private fb: FormBuilder, private recordService: RecordService) {}
+  get overTime(): Date {
+    return new Date(new Date().setHours(17, 0, 0));
+  }
 
   ngOnInit(): void {
     this.reloadRangeRecord();
   }
 
   reloadRangeRecord(): void {
-    this.recordService.getRange().subscribe(({ startTime, endTime, remark }) => {
-      this.startTime = startTime;
-      this.endTime = endTime;
+    this.recordService.getRange().subscribe(({ startTime, endTime, remark, isOverTime }) => {
+      this.startTime = startTime ? parse(startTime, 'yyyy-MM-dd HH:mm:ss', new Date()) : null;
+      this.endTime = endTime ? parse(endTime, 'yyyy-MM-dd HH:mm:ss', new Date()) : null;
       this.form.reset({ remark });
+
+      if (differenceInMinutes(this.overTime, this.endTime) > 0) {
+        this.editTimeForm.reset({ isOverTime: !!isOverTime });
+      }
     });
   }
 
-  onSubmit(): void {
-    const remark = this.form.get('remark').value;
-    this.recordService.create(remark).subscribe(() => {
+  async onSubmit(): Promise<void> {
+    const data = {
+      ...this.form.value
+    };
+
+    const now = new Date();
+
+    if (this.startTime && now > this.overTime) {
+      this.editTimeForm.patchValue({
+        hour: now.getHours(),
+        minute: now.getMinutes(),
+        isOverTime: true
+      });
+
+      const isEdit = await (this.editTimeDialogRef = this.dialog.open(this.editTimeTpl, {}))
+        .afterClosed()
+        .toPromise();
+
+      if (isEdit) {
+        const editTimeForm = this.editTimeForm.value;
+
+        data.isOverTime = editTimeForm.isOverTime;
+        data.attendDateTime = format(
+          data.isOverTime
+            ? new Date(now).setHours(editTimeForm.hour, editTimeForm.minute, 0)
+            : new Date(now).setHours(19, 0, 0),
+          'yyyy-MM-dd HH:mm:ss'
+        );
+      }
+    }
+
+    this.recordService.create(data).subscribe(() => {
       this.reloadRangeRecord();
-      alert('Success!!');
+      alert('打卡成功！');
     });
   }
 }

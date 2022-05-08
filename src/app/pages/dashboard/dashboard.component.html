@@ -17,7 +17,11 @@
           <span class="font-weight-bold">首次打卡</span>
         </div>
       </div>
-      <div class="w-50 h4 m-0" [class.font-weight-bold]="startTime" [class.text-black-50]="!startTime">
+      <div
+        class="w-50 h4 m-0"
+        [class.font-weight-bold]="startTime"
+        [class.text-black-50]="!startTime"
+      >
         {{ startTime ? (startTime | date: 'HH:mm') : '尚未打卡' }}
       </div>
     </li>
@@ -41,14 +45,51 @@
   </div>
 
   <div class="d-flex">
-    <button class="btn btn-secondary fa-2x rounded w-50" type="button" (click)="onSubmit()">
-      上班打卡
-      <span *ngIf="startTime">（編輯）</span>
-    </button>
-    <i class="flex-fill p-1"></i>
-    <button class="btn btn-secondary fa-2x rounded w-50" type="button" (click)="onSubmit()">
-      下班打卡
-      <span *ngIf="endTime">（編輯）</span>
+    <button class="btn btn-secondary rounded-pill w-100" type="button" (click)="onSubmit()">
+      <span class="fa-2x">打卡</span>
     </button>
   </div>
 </form>
+
+<ng-template #editTimeTpl let-data>
+  <div class="modal-header">
+    <h5 class="modal-title">編輯下班打卡時間</h5>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      (click)="editTimeDialogRef.close()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editTimeForm" class="text-center fa-2x">
+      目前時間已過晚上7點，請問是否要申請加班？
+      <mat-radio-group formControlName="isOverTime">
+        <mat-radio-button [value]="true">是</mat-radio-button>
+        <mat-radio-button [value]="false">否</mat-radio-button>
+      </mat-radio-group>
+
+      <div *ngIf="editTimeForm.get('isOverTime').value">
+        <select formControlName="hour" name="hour">
+          <option *ngFor="let hour of hours" [value]="hour">{{ hour | number: '2.0' }}</option>
+        </select>
+        <span>：</span>
+        <select formControlName="minute" name="minute">
+          <option *ngFor="let minute of minutes" [value]="minute">
+            {{ minute | number: '2.0' }}
+          </option>
+        </select>
+      </div>
+    </form>
+
+    <p class="text-danger text-center mt-4 h5">* 加班申請仍需要主管進行審核。</p>
+  </div>
+  <div *ngIf="editTimeForm.get('isOverTime').value" class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="editTimeDialogRef.close(true)">
+      確定
+    </button>
+  </div>
+</ng-template>

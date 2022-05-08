@@ -12,7 +12,15 @@ $as-theme: mat-light-theme($as-theme-primary, $as-theme-accent, $as-theme-warn);
 @include mat-datepicker-theme($as-theme);
 @include mat-form-field-theme($as-theme);
 @include mat-input-theme($as-theme);
+@include mat-select-theme($as-theme);
+@include mat-radio-theme($as-theme);
 
+.cdk-overlay-backdrop.modal-backdrop {
+  z-index: 1000;
+}
+.cdk-overlay-pane.modal {
+  z-index: 1000;
+}
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing.modal-backdrop {
   opacity: 0 !important;
   &.show {
@@ -55,7 +63,7 @@ $theme-colors: (
 html,
 body {
   font-family: 'Open Sans', sans-serif;
-  height: 100vh;
+  height: 100%;
   // background: linear-gradient(to bottom, #66a5ff 0, #8525ee 100%);
   background-color: var(--primary);
 }
