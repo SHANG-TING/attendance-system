@@ -14,6 +14,7 @@ $as-theme: mat-light-theme($as-theme-primary, $as-theme-accent, $as-theme-warn);
 @include mat-input-theme($as-theme);
 @include mat-select-theme($as-theme);
 @include mat-radio-theme($as-theme);
+@include mat-progress-spinner-theme($as-theme);
 
 .cdk-overlay-backdrop.modal-backdrop {
   z-index: 1000;

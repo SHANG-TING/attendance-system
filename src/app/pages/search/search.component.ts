@@ -3,8 +3,12 @@ import { FormBuilder } from '@angular/forms';
 
 import { addYears } from 'date-fns';
 
-import { JobService } from '@attendance-system/data/services';
 import { Job } from '@attendance-system/data/models';
+import { JobService } from '@attendance-system/data/services';
+import { AsDialog } from '@attendance-system/shared/ui/dialog';
+
+import { EventDetailDialogComponent } from '../calendar/ui/event-detail-dialog/event-detail-dialog.component';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -20,7 +24,9 @@ export class SearchComponent implements OnInit {
 
   jobs: Job[] = [];
 
-  constructor(private fb: FormBuilder, private jobService: JobService) {}
+  isLoading = false;
+
+  constructor(private dialog: AsDialog, private fb: FormBuilder, private jobService: JobService) {}
 
   ngOnInit() {}
 
@@ -32,11 +38,20 @@ export class SearchComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
+
     const now = new Date();
-    this.jobService.getList(addYears(now, -3), now, keyword).subscribe((jobs) => {
-      if ((this.jobs = jobs).length === 0) {
-        alert('查無資料！');
-      }
-    });
+    this.jobService
+      .getList(addYears(now, -3), now, keyword)
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe((jobs) => {
+        if ((this.jobs = jobs).length === 0) {
+          alert('查無資料！');
+        }
+      });
+  }
+
+  openEventDetailDialog(job: Job): void {
+    this.dialog.open(EventDetailDialogComponent, job).afterClosed$.subscribe(console.log);
   }
 }

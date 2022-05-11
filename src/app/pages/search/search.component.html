@@ -1,8 +1,9 @@
-<form [formGroup]="form" class="input-group d-flex p-3">
+<form [formGroup]="form" class="input-group d-flex p-3" (ngSubmit)="onSearch()">
   <input type="text" class="form-control" placeholder="請輸入關鍵字" formControlName="keyword" />
   <div class="input-group-append">
-    <button class="btn btn-secondary" type="button" (click)="onSearch()">
-      <i class="fa fa-search"></i>
+    <button class="btn btn-secondary" type="submit" [disabled]="isLoading">
+      <mat-spinner *ngIf="isLoading" [diameter]="24" [strokeWidth]="3"></mat-spinner>
+      <i *ngIf="!isLoading" class="fa fa-search"></i>
     </button>
   </div>
 </form>
@@ -12,6 +13,7 @@
     *ngFor="let job of jobs"
     href="javascript:void(0)"
     class="list-group-item list-group-item-action px-0 py-1 mb-1"
+    (click)="openEventDetailDialog(job)"
   >
     <div class="px-3" style="border-left: 4px solid; border-left-color: var(--secondary)">
       <h5 class="mb-1">{{ job.Title }}</h5>

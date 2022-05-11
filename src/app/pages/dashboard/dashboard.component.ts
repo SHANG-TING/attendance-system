@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   get overTime(): Date {
-    return new Date(new Date().setHours(17, 0, 0));
+    return new Date(new Date().setHours(19, 0, 0));
   }
 
   ngOnInit(): void {
@@ -58,8 +58,8 @@ export class DashboardComponent implements OnInit {
 
   reloadRangeRecord(): void {
     this.recordService.getRange().subscribe(({ startTime, endTime, remark, isOverTime }) => {
-      this.startTime = startTime ? parse(startTime, 'yyyy-MM-dd HH:mm:ss', new Date()) : null;
-      this.endTime = endTime ? parse(endTime, 'yyyy-MM-dd HH:mm:ss', new Date()) : null;
+      this.startTime = startTime ? new Date(startTime) : null;
+      this.endTime = endTime ? new Date(endTime) : null;
       this.form.reset({ remark });
 
       if (differenceInMinutes(this.overTime, this.endTime) > 0) {
