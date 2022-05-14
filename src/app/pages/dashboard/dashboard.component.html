@@ -1,10 +1,10 @@
-<form [formGroup]="form" class="d-flex flex-column text-center">
-  <p class="fa-2x mb-0 text-white" *ngIf="currentTime$ | async as currentTIme">
+<form [formGroup]="form" class="d-flex flex-column px-3 text-center w-100">
+  <p class="h2 mb-0 text-white" *ngIf="currentTime$ | async as currentTIme">
     {{ currentTIme | date: 'yyyy-MM-dd' }}
     {{ weekDay[currentTIme | date: 'EEEE'] }}
   </p>
 
-  <p class="fa-5x font-weight-bold text-white">
+  <p class="fa-3x font-weight-bold text-white mb-0">
     {{ currentTime$ | async | date: 'HH:mm:ss' }}
   </p>
 
@@ -46,7 +46,7 @@
 
   <div class="d-flex">
     <button class="btn btn-secondary rounded-pill w-100" type="button" (click)="onSubmit()">
-      <span class="fa-2x">打卡</span>
+      <span class="font-weight-bold h3">打卡</span>
     </button>
   </div>
 </form>
@@ -59,7 +59,7 @@
       class="close"
       data-dismiss="modal"
       aria-label="Close"
-      (click)="editTimeDialogRef.close()"
+      (click)="editTimeDialogRef.close(false)"
     >
       <span aria-hidden="true">&times;</span>
     </button>
@@ -67,12 +67,12 @@
   <div class="modal-body">
     <form [formGroup]="editTimeForm" class="text-center fa-2x">
       目前時間已過晚上7點，請問是否要申請加班？
-      <mat-radio-group formControlName="isOverTime">
+      <mat-radio-group formControlName="overTime">
         <mat-radio-button [value]="true">是</mat-radio-button>
         <mat-radio-button [value]="false">否</mat-radio-button>
       </mat-radio-group>
 
-      <div *ngIf="editTimeForm.get('isOverTime').value">
+      <div *ngIf="editTimeForm.get('overTime').value">
         <select formControlName="hour" name="hour">
           <option *ngFor="let hour of hours" [value]="hour">{{ hour | number: '2.0' }}</option>
         </select>
@@ -87,7 +87,7 @@
 
     <p class="text-danger text-center mt-4 h5">* 加班申請仍需要主管進行審核。</p>
   </div>
-  <div *ngIf="editTimeForm.get('isOverTime').value" class="modal-footer">
+  <div *ngIf="editTimeForm.get('overTime').value" class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="editTimeDialogRef.close(true)">
       確定
     </button>

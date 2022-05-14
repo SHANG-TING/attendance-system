@@ -1,5 +1,5 @@
 <form [formGroup]="form" class="input-group d-flex p-3" (ngSubmit)="onSearch()">
-  <input type="text" class="form-control" placeholder="請輸入關鍵字" formControlName="keyword" />
+  <input type="text" class="form-control" placeholder="請輸入關鍵字" formControlName="customer" />
   <div class="input-group-append">
     <button class="btn btn-secondary" type="submit" [disabled]="isLoading">
       <mat-spinner *ngIf="isLoading" [diameter]="24" [strokeWidth]="3"></mat-spinner>

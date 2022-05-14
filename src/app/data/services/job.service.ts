@@ -11,11 +11,11 @@ export class JobService {
 
   constructor(private http: HttpClient) {}
 
-  getList(startDate: Date, endDate: Date, keyword?: string): Observable<Job[]> {
+  getList(startDate: Date, endDate: Date, customer?: string): Observable<Job[]> {
     const params = {
       startDate: formatDate(startDate, 'yyyy-MM-dd', 'en-us'),
       endDate: formatDate(endDate, 'yyyy-MM-dd', 'en-us'),
-      keyword: keyword || ''
+      customer: customer || ''
     };
 
     const key = JSON.stringify(params);

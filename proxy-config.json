@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://localhost:44354",
+    "target": "https://mail.garefully.com:1687",
     "secure": false,
     "changeOrigin": true
   }

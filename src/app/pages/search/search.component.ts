@@ -19,7 +19,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class SearchComponent implements OnInit {
   form = this.fb.group({
-    keyword: ['']
+    customer: ['']
   });
 
   jobs: Job[] = [];
@@ -31,9 +31,9 @@ export class SearchComponent implements OnInit {
   ngOnInit() {}
 
   onSearch(): void {
-    const keyword = this.form.get('keyword').value;
+    const customer = this.form.get('customer').value;
 
-    if (!keyword) {
+    if (!customer) {
       alert('關鍵字不能為空！');
       return;
     }
@@ -42,7 +42,7 @@ export class SearchComponent implements OnInit {
 
     const now = new Date();
     this.jobService
-      .getList(addYears(now, -3), now, keyword)
+      .getList(addYears(now, -3), now, customer)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe((jobs) => {
         if ((this.jobs = jobs).length === 0) {

@@ -11,7 +11,7 @@ export class RecordService {
   getRange(
     startTime?: string,
     endTime?: string
-  ): Observable<{ startTime: string; endTime: string; remark: string; isOverTime?: boolean }> {
+  ): Observable<{ startTime: string; endTime: string; remark: string; overTime?: boolean }> {
     const now = new Date();
     const params = {} as any;
 
