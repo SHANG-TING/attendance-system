@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 
 import { differenceInMinutes, format } from 'date-fns';
 import { timer } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, startWith, tap } from 'rxjs/operators';
 
 import { RecordService } from '@attendance-system/data/services';
 import { AsDialog, AsDialogRef } from '@attendance-system/shared/ui/dialog';
@@ -30,6 +30,13 @@ export class DashboardComponent implements OnInit {
   startTime: Date = null;
   endTime: Date = null;
 
+  minutes$ = this.editTimeForm.get('hour').valueChanges.pipe(
+    startWith(19),
+    map((hour) => +hour),
+    tap((hour) => hour === 19 && this.editTimeForm.get('minute').setValue(0)),
+    map((hour) => (hour === 19 ? [0] : this.minutes))
+  );
+
   readonly weekDay = {
     Monday: '星期一',
     Tuesday: '星期二',
@@ -39,7 +46,7 @@ export class DashboardComponent implements OnInit {
     Saturday: '星期六',
     Sunday: '星期日'
   };
-  readonly hours = [19, 20, 21, 22, 23];
+  readonly hours = Array.from({ length: 12 }, (_, i) => i + 8);
   readonly minutes = Array.from({ length: 60 }, (_, i) => i);
 
   constructor(
@@ -75,28 +82,24 @@ export class DashboardComponent implements OnInit {
       attendDateTime: null
     };
 
-    console.log(`format(this.startTime, 'HH:mm:ss') :>> `, format(this.startTime, 'HH:mm:ss'));
-
     if (format(this.startTime, 'HH:mm:ss') !== '00:00:00' && now > this.overTime) {
       this.editTimeForm.patchValue({
-        hour: now.getHours(),
-        minute: now.getMinutes(),
-        overTime: true
+        hour: 19,
+        minute: 0,
+        overTime: false
       });
 
       (this.editTimeDialogRef = this.dialog.open(this.editTimeTpl, {}))
         .afterClosed()
         .subscribe(({ data: isEdit }) => {
           if (isEdit) {
-            const editTimeForm = this.editTimeForm.value;
+            const { hour, minute, overTime } = this.editTimeForm.value;
 
-            data.overTime = editTimeForm.overTime;
             data.attendDateTime = format(
-              data.overTime
-                ? new Date(now).setHours(editTimeForm.hour, editTimeForm.minute, 0)
-                : new Date(now).setHours(19, 0, 0),
+              overTime ? now : new Date(now).setHours(hour, minute, 0),
               `yyyy-MM-dd HH:mm:ss.000`
             );
+            data.overTime = overTime;
 
             this.recordService.create(data).subscribe(() => {
               this.reloadRangeRecord();

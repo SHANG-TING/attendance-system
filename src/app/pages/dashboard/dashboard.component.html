@@ -72,22 +72,24 @@
         <mat-radio-button [value]="false">否</mat-radio-button>
       </mat-radio-group>
 
-      <div *ngIf="editTimeForm.get('overTime').value">
+      <div *ngIf="!editTimeForm.get('overTime').value">
         <select formControlName="hour" name="hour">
           <option *ngFor="let hour of hours" [value]="hour">{{ hour | number: '2.0' }}</option>
         </select>
         <span>：</span>
         <select formControlName="minute" name="minute">
-          <option *ngFor="let minute of minutes" [value]="minute">
+          <option *ngFor="let minute of minutes$ | async" [value]="minute">
             {{ minute | number: '2.0' }}
           </option>
         </select>
       </div>
     </form>
 
-    <p class="text-danger text-center mt-4 h5">* 加班申請仍需要主管進行審核。</p>
+    <p *ngIf="editTimeForm.get('overTime').value" class="text-danger text-center mt-2 h4">
+      * 加班申請仍需要主管進行審核。
+    </p>
   </div>
-  <div *ngIf="editTimeForm.get('overTime').value" class="modal-footer">
+  <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="editTimeDialogRef.close(true)">
       確定
     </button>
